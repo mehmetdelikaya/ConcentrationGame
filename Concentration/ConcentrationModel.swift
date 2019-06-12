@@ -24,7 +24,7 @@ class ConcentrationModel{
                         foundIndex = index
                     }else{
                         return nil
-                    }
+                    } 
                 }
             }
             return foundIndex
