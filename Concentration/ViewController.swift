@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     }
     
     private var randomTheme : Int?
-    private var emojiCodes : Array<String>?
+    private var emojiCodes : String?
    
     @IBOutlet private weak var flipCounter: UILabel!
     @IBOutlet private var cardButtons: [UIButton]!
@@ -28,7 +28,8 @@ class ViewController: UIViewController {
     @IBOutlet private weak var newGame: UIButton!
     @IBAction private func startNewGame(_ sender: UIButton) {
         
-        scoreBoard.text = "Score: 0"
+        //scoreBoard.text = "Score: 0"
+        
         
         game = ConcentrationModel(numberOfPairOfCards: (cardButtons.count+1)/2)
         
@@ -36,18 +37,28 @@ class ViewController: UIViewController {
         updateViewFromModel()
     }
     
-  
+    private func updateScoreBoard(text toScoreBoard :String ){
+        let attributes : [NSAttributedString.Key : Any] = [
+            .strokeWidth : 5.0,
+            //.strokeColor : #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
+        ]
+        
+        let attributedString = NSAttributedString(string: toScoreBoard, attributes: attributes)
+        scoreBoard.attributedText = attributedString
+        
+        
+    }
     
     func prepareViews(){
         
-        
+        updateScoreBoard(text: "Score: 0")
         flipCounter.text = "Flip Count: \(game.getFlipCount())"
         
         randomTheme = Int(arc4random_uniform(UInt32(7)))
         switch randomTheme {
         case 0:
             backgroundTheme.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-            emojiCodes = ["🔧","🔨","⚒","🛠","⛏","🔩","⚙️","⛓","🔫","💣","🔪","🗡","⚔️","🛡"]
+            emojiCodes = "🔧🔨⚒🛠⛏🔩⚙️⛓🔫💣🔪🗡⚔️🛡"
             for index in cardButtons.indices{
                 cardButtons[index].backgroundColor = #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1)
             }
@@ -59,7 +70,7 @@ class ViewController: UIViewController {
             newGame.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControl.State.normal)
         case 1:
             backgroundTheme.backgroundColor = #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1)
-            emojiCodes = ["🤒","🤕","🤢","🤮","🤧","😇","🤠","🤡","🥳","🥴","🥺","🤥","🤫","🤭"]
+            emojiCodes = "🤒🤕🤢🤮🤧😇🤠🤡🥳🥴🥺🤥🤫🤭"
             for index in cardButtons.indices{
                 cardButtons[index].backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
             }
@@ -71,7 +82,7 @@ class ViewController: UIViewController {
             newGame.setTitleColor(#colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1), for: UIControl.State.normal)
         case 2:
             backgroundTheme.backgroundColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
-            emojiCodes = ["🚗","🚲","🚅","🚌","🛩","🏎","🚓","🚑","🏍","🚁","🚀","🚛","🚜","🛴"]
+            emojiCodes = "🚗🚲🚅🚌🛩🏎🚓🚑🏍🚁🚀🚛🚜🛴"
             for index in cardButtons.indices{
                 cardButtons[index].backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             }
@@ -83,7 +94,7 @@ class ViewController: UIViewController {
             newGame.setTitleColor(#colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1), for: UIControl.State.normal)
         case 3:
             backgroundTheme.backgroundColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
-            emojiCodes = ["🥩","🍗","🍖","🌭","🍔","🍟","🍕","🥪","🥙","🌮","🌯","🥗","🥘","🍳"]
+            emojiCodes = "🥩🍗🍖🌭🍔🍟🍕🥪🥙🌮🌯🥗🥘🍳"
             for index in cardButtons.indices{
                 cardButtons[index].backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
             }
@@ -95,7 +106,7 @@ class ViewController: UIViewController {
             newGame.setTitleColor(#colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1), for: UIControl.State.normal)
         case 4:
             backgroundTheme.backgroundColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
-            emojiCodes = ["🎭","🎨","🎬","🎤","🎧","🎼","🎹","🥁","🎷","🎺","🎸","🎻","🎲","🧩"]
+            emojiCodes = "🎭🎨🎬🎤🎧🎼🎹🥁🎷🎺🎸🎻🎲🧩"
             for index in cardButtons.indices{
                 cardButtons[index].backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
             }
@@ -107,7 +118,7 @@ class ViewController: UIViewController {
             newGame.setTitleColor(#colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1), for: UIControl.State.normal)
         case 5:
             backgroundTheme.backgroundColor = #colorLiteral(red: 0.6679978967, green: 0.4751212597, blue: 0.2586010993, alpha: 1)
-            emojiCodes = ["⌚️","📱","📻","💻","⌨️","🖥","🖨","☎️","🖲","🕹","🗜","💽","💾","💿"]
+            emojiCodes = "⌚️📱📻💻⌨️🖥🖨☎️🖲🕹🗜💽💾💿"
             for index in cardButtons.indices{
                 cardButtons[index].backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
             }
@@ -119,7 +130,7 @@ class ViewController: UIViewController {
             newGame.setTitleColor(#colorLiteral(red: 0.6679978967, green: 0.4751212597, blue: 0.2586010993, alpha: 1), for: UIControl.State.normal)
         case 6:
             backgroundTheme.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            emojiCodes = ["🦖","🦕","🐙","🦑","🦉","🦀","🐡","🐠","🐟","🦅","🐳","🐍","🦈","🐊"]
+            emojiCodes = "🦖🦕🐙🦑🦉🦀🐡🐠🐟🦅🐳🐍🦈🐊"
             for index in cardButtons.indices{
                 cardButtons[index].backgroundColor = #colorLiteral(red: 0.5810584426, green: 0.1285524964, blue: 0.5745313764, alpha: 1)
             }
@@ -131,7 +142,7 @@ class ViewController: UIViewController {
             newGame.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: UIControl.State.normal)
         default:
             backgroundTheme.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            emojiCodes = ["🦖","🦕","🐙","🦑","🦐","🦀","🐡","🐠","🐟","🐬","🐳","🐋","🦈","🐊"]
+            emojiCodes = "🦖🦕🐙🦑🦐🦀🐡🐠🐟🐬🐳🐋🦈🐊"
             for index in cardButtons.indices{
                 cardButtons[index].backgroundColor = #colorLiteral(red: 0.5810584426, green: 0.1285524964, blue: 0.5745313764, alpha: 1)
             }
@@ -153,9 +164,10 @@ class ViewController: UIViewController {
     @IBAction func touchCard(_ sender: UIButton) {
         
         if let cardNumber = cardButtons.firstIndex(of: sender){
-            scoreBoard.text = "Score:  \(game.chooseCard(at: cardNumber))"
+            //scoreBoard.text = "Score:  \(game.chooseCard(at: cardNumber))"
+            updateScoreBoard(text: "Score: \(game.chooseCard(at: cardNumber))")
             updateViewFromModel()
-             flipCounter.text = "Flip Count: \(game.getFlipCount())"
+            flipCounter.text = "Flip Count: \(game.getFlipCount())"
         }else{
             print("Chosen card is not on buttons array")
         }
@@ -179,14 +191,14 @@ class ViewController: UIViewController {
 
     
     
-    private var emoji = [Int:String]()
+    private var emoji = [Card:String]()
     
     private func emoji(for card: Card) -> String{
         
-        if emoji[card.identifier]==nil, emojiCodes!.count>0 {
-                let randomIndex = emojiCodes?.count.arc4random
-                
-                emoji[card.identifier] = emojiCodes!.remove(at: randomIndex!)
+        if emoji[card]==nil, emojiCodes!.count>0 {
+                //let randomIndex = emojiCodes?.count.arc4random
+                let randomIndex = emojiCodes?.index(emojiCodes!.startIndex , offsetBy: emojiCodes!.count.arc4random)
+                emoji[card] = String(emojiCodes!.remove(at: randomIndex!))
             
         }
         
@@ -198,7 +210,7 @@ class ViewController: UIViewController {
 //            return "?"
 //        }
         
-        return emoji[card.identifier] ?? "?"
+        return emoji[card] ?? "?"
     }
 }
 
